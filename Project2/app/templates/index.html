@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+{% if request.args|length > 0 and request.args.finished == request.args.total %}
+<h1>Thank you for participating, {{ request.args.name }}!</h1>
+{% else %}
+{% if request.args|length > 0 and (not request.args.name or not request.args.lang) %}
+<h1>Please type in your name and language</h1>
+{% endif %}
+<form>
+    <input type="text" hidden readonly value="{{ survey.id }}" name="id">
+    <input type="text" hidden readonly value="{{ survey.finished }}" name="finished">
+    <input type="text" hidden readonly value="{{ survey.total }}" name="total">
+    <input type="text" placeholder="Your name (in English)" autocomplete="off"
+        {% if request.args.name %} value="{{ request.args.name }}" {% endif %}
+    name="name">
+    <input type="text" placeholder="Your language (in English)" autocomplete="off"
+        {% if request.args.lang %} value="{{ request.args.lang }}" {% endif %}
+    name="lang">
+    <br>
+    <input type="submit"
+    {% if survey.finished < survey.total %}
+    value="Next"
+    {% else %}
+    value="Finish"
+    {% endif %}>
+    <p>Block <b>{{ survey.finished }}</b> of <b>{{ survey.total }}</b></p>
+    <table>
+       <thead>
+           <th>English</th>
+           <th>Translation</th>
+           <th>Commentary (optional)</th>
+       </thead>
+        {% for word in survey.words %}
+        <tr>
+            <td>{{ word }}<input type="text" hidden readonly value="{{ word }}" name='words'></td>
+            <td><input type="text" autocomplete="off" name='translations'></td>
+            <td><input type="text" autocomplete="off" name='commentaries'></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+</form>
+{% endif %}
+{% endblock %}

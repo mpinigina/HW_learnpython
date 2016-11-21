@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<p>Total question count: {{ stats.quest_count }}</p>
+<p>Interview count: {{ stats.iv_count }}</p>
+{% if stats.iv_count > 0 %}
+<p>Most popular language: {{ stats.most_pop_lang.lang }} ({{ stats.most_pop_lang.count }} interviews)</p>
+{% endif %}
+{% if stats.dates %}
+<table>
+   <thead><th>Date</th><th>Interview count</th></thead>
+    {% for dt, count in stats.dates.items() %}
+    <tr>
+        <td>{{ dt }}</td>
+        <td>{{ count }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+{% endblock %}

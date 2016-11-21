@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+{% if results %}
+{% for result in results %}
+    <p>Date: {{ result.datetime }}</p>
+    <p>Language: {{ result.language }}</p>
+    <p>Informant: {{ result.name }}</p>
+    <table>
+        <thead>
+            <th>English</th>
+            <th>Translation</th>
+            <th>Commentary</th>
+        </thead>
+        {% for answer in result.answers %}
+            <tr>
+                <td>{{ answer.english }}</td>
+                <td>{{ answer.translation }}</td>
+                <td>{{ answer.commentary }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <hr>
+{% endfor %}
+{% else %}
+Nothing found
+<hr>
+{% endif %}
+<a href="{{ links.search }}">Back</a>
+{% endblock %}

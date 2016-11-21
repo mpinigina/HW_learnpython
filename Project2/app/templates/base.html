@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+    {% if title %} Swadesh - {{ title }}
+	{% else %}
+	Swadesh
+    {% endif %}
+    </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='mystyle.css') }}">
+</head>
+
+<body>
+    <ul class="hr">
+        <li><a href="{{ links.index }}">Survey</a></li>
+        <li><a href="{{ links.stats }}">Stats</a></li>
+        <li><a href="{{ links.json }}">Json</a></li>
+        <li><a href="{{ links.search }}">Search</a></li>
+    </ul>
+    <hr>
+    {% block content %}{% endblock %}
+</body>
+
+</html>

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<form action="{{ links.results }}">
+    <input type="text" placeholder="Language" autocomplete="off" name="lang">
+    <br>
+    From <input type="date" value="{{ dt1 }}" name="dt1"> to <input type="date" value="{{ dt2 }}" name="dt2">
+    <br>
+    <input type="submit" value="Search">
+</form>
+{% endblock %}
